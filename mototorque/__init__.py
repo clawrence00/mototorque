@@ -1,6 +1,6 @@
 from flask_login import LoginManager
 import os
-from flask import flask
+from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 if os.path.exists("env.py"):
     import env
@@ -20,4 +20,4 @@ db = SQLAlchemy(app)
 
 login_manager = LoginManager()
 
-from taskmanager import routes  # noqa
+from mototorque import routes  # noqa
