@@ -1,7 +1,7 @@
 from mototorque import db
 
 
-class Lexicon(db.Model):
+class Words(db.Model):
     # schema for the Lexicon model
     id = db.Column(db.Integer, primary_key=True)
     word_phrase = db.Column(db.String(100), nullable=False)
