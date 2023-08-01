@@ -8,3 +8,19 @@ body {
 main {
     flex: 1 0 auto;
 }
+
+.add_link {
+    background-color: #43a047;
+}
+
+.add_link:hover {
+    background-color: #4caf50;
+}
+
+.sign_link {
+    background-color: #fb8c00;
+}
+
+.sign_link:hover {
+    background-color: #ff9800;
+}
