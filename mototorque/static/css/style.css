@@ -9,6 +9,7 @@ main {
     flex: 1 0 auto;
 }
 
+/* styling for links/buttons */
 .add_link {
     background-color: #43a047;
 }
