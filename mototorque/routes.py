@@ -26,4 +26,5 @@ def add_word():
 def browse():
     selected_letter = request.args.get('type')
     print(selected_letter)  # <-- should print letter
-    return render_template("browse.html", letter=selected_letter)
+    word = list(Words.query.order_by(Words.word_phrase).all())
+    return render_template("browse.html", letter=selected_letter, word=word)
