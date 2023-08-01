@@ -12,3 +12,9 @@ def home():
 def add():
     return render_template("add.html")
 
+
+@app.route('/browse', methods=['GET', 'POST'])
+def browse():
+    selected_letter = request.args.get('type')
+    print(selected_letter)  # <-- should print letter
+    return render_template("browse.html", letter=selected_letter)
