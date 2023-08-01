@@ -25,3 +25,8 @@ main {
 .sign_link:hover {
     background-color: #ff9800;
 }
+
+/* styling for form */
+input {
+    color: white;
+}

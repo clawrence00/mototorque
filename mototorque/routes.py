@@ -11,3 +11,4 @@ def home():
 @app.route("/add")
 def add():
     return render_template("add.html")
+
