@@ -1,0 +1,45 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="row">
+  <div class="col s12">
+    <div class="card blue-grey darken-3">
+      <div class="card-content white-text">
+        <span class="card-title">Add your word or phrase</span>
+        <div class="row">
+          <form class="col s12">
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="word_phrase" type="text" class="validate" />
+                <label for="word_phrase">Word or phrase</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="definition" type="text" class="validate" />
+                <label for="definition">Definition</label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="input-field col s12">
+                <input id="example" type="text" class="validate" />
+                <label for="example">Example</label>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="card-action">
+        <button
+          class="btn waves-effect waves-light"
+          type="submit"
+          name="action"
+        >
+          Submit
+          <i class="fa-solid fa-paper-plane"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

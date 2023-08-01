@@ -45,7 +45,9 @@
               >
             </li>
             <li>
-              <a href="#" class="waves-effect waves-light btn add_link"
+              <a
+                href="{{ url_for('add') }}"
+                class="waves-effect waves-light btn add_link"
                 >Add +</a
               >
             </li>
@@ -69,7 +71,11 @@
           >
         </li>
         <li>
-          <a href="#" class="waves-effect waves-light btn add_link">Add +</a>
+          <a
+            href="{{ url_for('add') }}"
+            class="waves-effect waves-light btn add_link"
+            >Add +</a
+          >
         </li>
         <li><a href="#">Login</a></li>
         <li><a href="#">Logout</a></li>

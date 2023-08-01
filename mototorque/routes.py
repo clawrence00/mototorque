@@ -6,3 +6,8 @@ from mototorque.models import Lexicon, User
 @app.route("/")
 def home():
     return render_template("index.html")
+
+
+@app.route("/add")
+def add():
+    return render_template("add.html")
