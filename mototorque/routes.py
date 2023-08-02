@@ -27,14 +27,9 @@ def add_word():
     return render_template("add.html")
 
 
-# @ app.route('/browse', methods=['GET', 'POST'])
-# def browse():
-#     selected_letter = request.args.get('type')
-#     print(selected_letter)  # <-- should print letter
-#     word = list(Dictionary.query.order_by(Dictionary.word_phrase).all())
-#     return render_template("browse.html", letter=selected_letter, word=word)
-
-@ app.route('/browse')
+@ app.route('/browse', methods=['GET', 'POST'])
 def browse():
+    selected_letter = request.args.get('type')
+    print(selected_letter)  # <-- should print letter
     entry = list(Dictionary.query.order_by(Dictionary.word_phrase).all())
-    return render_template("browse.html", entry=entry)
+    return render_template("browse.html", letter=selected_letter, entry=entry)
