@@ -1,22 +1,22 @@
 {% extends "base.html" %} {% block content %}
 
 <div class="row">
+    {% for words in dictionary %}
   <div class="col s12">
     <h3>{{ letter }}</h3>
     <div class="card blue-grey darken-3">
-      {% for word in words %}
       <div class="card-content white-text">
-        <span class="card-title">{{ words.word_phrase }}</span>
+        <span class="card-title">{{ words.word_phrase }}/span>
       </div>
       <div>
-        <p>{{ words.definition }}</p>
+        <p>test</p>
       </div>
       <div class="card-action">
-        <p>{{ words.example }}</p>
+        <p>test</p>
       </div>
-      {% endfor %}
     </div>
   </div>
+{% endfor %}
 </div>
 
 {% endblock %}

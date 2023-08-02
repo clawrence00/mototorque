@@ -6,7 +6,7 @@ class Dictionary(db.Model):
     # schema for the Dictionary model
     id = db.Column(db.Integer, primary_key=True)
     word_phrase = db.Column(db.String(100), nullable=False)
-    definition = db.Column(db.String(200), unique=True, nullable=False)
+    definition = db.Column(db.String(200), nullable=False)
     example = db.Column(db.String(200), nullable=False)
     # date_posted = db.Column(db.DateTime, default=datetime.utcnow)
     # Foreign key to link users (refer to primary key of Users)
