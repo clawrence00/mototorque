@@ -8,6 +8,11 @@ def home():
     return render_template("index.html")
 
 
+@app.route("/signup")
+def signup():
+    return render_template("signup.html")
+
+
 @app.route("/add_word", methods=["GET", "POST"])
 def add_word():
     if request.method == "POST":
@@ -26,5 +31,5 @@ def add_word():
 def browse():
     selected_letter = request.args.get('type')
     print(selected_letter)  # <-- should print letter
-    # word = list(Dictionary.query.order_by(Dictionary.word_phrase).all())
+    word = list(Dictionary.query.order_by(Dictionary.word_phrase).all())
     return render_template("browse.html", letter=selected_letter)
