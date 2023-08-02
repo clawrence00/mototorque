@@ -1,3 +1,4 @@
+from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from mototorque import db
 
 
@@ -7,6 +8,7 @@ class Dictionary(db.Model):
     word_phrase = db.Column(db.String(100), nullable=False)
     definition = db.Column(db.String(200), unique=True, nullable=False)
     example = db.Column(db.String(200), nullable=False)
+    # date_posted = db.Column(db.DateTime, default=datetime.utcnow)
     # Foreign key to link users (refer to primary key of Users)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
@@ -15,12 +17,12 @@ class Dictionary(db.Model):
         return self.word_phrase
 
 
-class Users(db.Model):
+class Users(db.Model, UserMixin):
     # schema for the User model
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(50), unique=True)
-    password = db.Column(db.String(128))
-    email = db.Column(db.String(50), unique=True)
+    username = db.Column(db.String(50), nullable=False, unique=True)
+    email = db.Column(db.String(120), nullable=False, unique=True)
+    password_hash = db.Column(db.String(128))
     # User can have many posts
     posts = db.relationship('Dictionary', backref='poster')
 
