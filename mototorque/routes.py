@@ -31,5 +31,6 @@ def add_word():
 def browse():
     selected_letter = request.args.get('type')
     print(selected_letter)  # <-- should print letter
-    entry = list(Dictionary.query.order_by(Dictionary.word_phrase).all())
+    entry = list(Dictionary.query.filter(
+        Dictionary.word_phrase.startswith(selected_letter)).all())
     return render_template("browse.html", letter=selected_letter, entry=entry)
