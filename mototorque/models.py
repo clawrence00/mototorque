@@ -1,6 +1,7 @@
 from flask_login import UserMixin, LoginManager
 from mototorque import db
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import datetime
 
 
 class Dictionary(db.Model):
@@ -9,7 +10,7 @@ class Dictionary(db.Model):
     word_phrase = db.Column(db.String(100), nullable=False)
     definition = db.Column(db.String(200), nullable=False)
     example = db.Column(db.String(200), nullable=False)
-    # date_posted = db.Column(db.DateTime, default=datetime.utcnow)
+    date_posted = db.Column(db.DateTime, default=datetime.utcnow)
     # Foreign key to link users (refer to primary key of Users)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
