@@ -27,10 +27,30 @@ def add_word():
     return render_template("add.html")
 
 
+@app.route("/edit_word/<int:word_id>", methods=["GET", "POST"])
+def edit_word(word_id):
+    word = Dictionary.query.get_or_404(word_id)
+    if request.method == "POST":
+        word.word_phrase = request.form.get("word_phrase"),
+        word.definition = request.form.get("definition"),
+        word.example = request.form.get("example"),
+        db.session.commit()
+        return render_template("index.html")
+    return render_template("edit.html", word=word)
+
+
+@app.route("/delete_word/<int:word_id>")
+def delete_word(word_id):
+    word = Dictionary.query.get_or_404(word_id)
+    db.session.delete(word)
+    db.session.commit()
+    return redirect(url_for("home"))
+
+
 @ app.route('/browse', methods=['GET', 'POST'])
 def browse():
     selected_letter = request.args.get('type')
     print(selected_letter)  # <-- should print letter
-    entry = list(Dictionary.query.filter(
+    words = list(Dictionary.query.filter(
         Dictionary.word_phrase.startswith(selected_letter)).all())
-    return render_template("browse.html", letter=selected_letter, entry=entry)
+    return render_template("browse.html", letter=selected_letter, words=words)

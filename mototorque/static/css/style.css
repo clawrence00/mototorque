@@ -26,7 +26,29 @@ main {
     background-color: #ff9800;
 }
 
+.edit_link {
+    background-color: #1976d2;
+}
+
+.edit_link:hover {
+    background-color: #1e88e5;
+}
+
+.delete_link {
+    background-color: #d32f2f;
+}
+
+.delete_link:hover {
+    background-color: #e53935;
+}
+
 /* styling for form */
 input {
     color: white;
+}
+
+/* Card Styling */
+
+.card .card-title {
+    font-weight: 600;
 }
