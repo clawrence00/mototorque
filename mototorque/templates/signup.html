@@ -4,50 +4,46 @@
   <div class="col s12">
     <div class="card blue-grey darken-3">
       <div class="card-content white-text">
-        <span class="card-title">Add your word or phrase</span>
+        <span class="card-title">Enter your details to sign up!</span>
         <div class="row">
-          <form
-            class="col s12"
-            method="POST"
-            action="{{ url_for('add_word') }}"
-          >
+          <form class="col s12" method="POST" action="#">
             <div class="row">
               <div class="input-field col s12">
                 <input
-                  id="word_phrase"
-                  name="word_phrase"
-                  type="text"
-                  maxlength="100"
+                  id="email"
+                  name="email"
+                  type="email"
+                  maxlength="120"
                   class="validate"
                   required
                 />
-                <label for="word_phrase">Word or phrase</label>
+                <label for="email">Enter your Email</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
                 <input
-                  id="definition"
-                  name="definition"
+                  id="username"
+                  name="username"
                   type="text"
-                  maxlength="200"
+                  maxlength="50"
                   class="validate"
                   required
                 />
-                <label for="definition">Definition</label>
+                <label for="username">Enter a Username</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
                 <input
-                  id="example"
-                  name="example"
-                  type="text"
-                  maxlength="100"
+                  id="password"
+                  name="password"
+                  type="password"
+                  maxlength="128"
                   class="validate"
                   required
                 />
-                <label for="example">Example</label>
+                <label for="password">Enter a password</label>
               </div>
             </div>
             <div class="card-action">
@@ -56,7 +52,7 @@
                 type="submit"
                 name="action"
               >
-                Submit
+                Sign up!
                 <i class="fa-solid fa-paper-plane"></i>
               </button>
             </div>
