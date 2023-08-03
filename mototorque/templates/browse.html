@@ -22,11 +22,6 @@
           class="btn waves-effect waves-red delete_link modal-trigger"
           >Delete</a
         >
-        <!-- <a
-          href="{{ url_for('delete_word', word_id=word.id) }}"
-          class="btn waves-effect waves-red delete_link"
-          >Delete</a
-        > -->
       </div>
     </div>
   </div>
@@ -37,14 +32,18 @@
       <p>Are you sure you want to delete this?</p>
     </div>
     <div class="modal-footer">
-      <a
-        href=" {{ url_for('delete_word', word_id=word.id) }}"
-        class="btn waves-effect waves-red delete_link"
-        >Yes</a
-      >
-      <a href="#!" class="waves-effect waves btn modal-close edit-link"
-        >Cancel</a
-      >
+      <div class="col s6">
+        <a
+          href=" {{ url_for('delete_word', word_id=word.id) }}"
+          class="btn waves-effect waves-red delete_link"
+          >Yes</a
+        >
+      </div>
+      <div class="col s6">
+        <a href="#!" class="waves-effect waves btn modal-close edit-link"
+          >Cancel</a
+        >
+      </div>
     </div>
   </div>
   {% endfor %}
