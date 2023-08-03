@@ -2,15 +2,35 @@ from flask import render_template, request, redirect, url_for
 from mototorque import app, db
 from mototorque.models import Dictionary, Users
 
+# Routes for navigation
+
 
 @app.route("/")
 def home():
     return render_template("index.html")
 
 
+@ app.route('/browse', methods=['GET', 'POST'])
+def browse():
+    selected_letter = request.args.get('type')
+    print(selected_letter)  # <-- should print letter
+    words = list(Dictionary.query.filter(
+        Dictionary.word_phrase.startswith(selected_letter)).all())
+    return render_template("browse.html", letter=selected_letter, words=words)
+
+# Routes for user
+
+
 @app.route("/signup")
 def signup():
     return render_template("signup.html")
+
+
+@app.route("/enter_user")
+def enter_user():
+    return render_template("enter_user.html")
+
+# Routes for CRUD records
 
 
 @app.route("/add_word", methods=["GET", "POST"])
@@ -45,12 +65,3 @@ def delete_word(word_id):
     db.session.delete(word)
     db.session.commit()
     return redirect(url_for("home"))
-
-
-@ app.route('/browse', methods=['GET', 'POST'])
-def browse():
-    selected_letter = request.args.get('type')
-    print(selected_letter)  # <-- should print letter
-    words = list(Dictionary.query.filter(
-        Dictionary.word_phrase.startswith(selected_letter)).all())
-    return render_template("browse.html", letter=selected_letter, words=words)

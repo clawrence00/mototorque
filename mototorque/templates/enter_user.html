@@ -4,50 +4,33 @@
   <div class="col s12">
     <div class="card blue-grey darken-3">
       <div class="card-content white-text">
-        <span class="card-title">Add your word or phrase</span>
+        <span class="card-title">Enter your details to log in.</span>
         <div class="row">
-          <form
-            class="col s12"
-            method="POST"
-            action="{{ url_for('add_word') }}"
-          >
+          <form class="col s12" method="POST">
             <div class="row">
               <div class="input-field col s12">
                 <input
-                  id="word_phrase"
-                  name="word_phrase"
+                  id="username"
+                  name="username"
                   type="text"
                   maxlength="100"
                   class="validate"
                   required
                 />
-                <label for="word_phrase">Word or phrase</label>
+                <label for="username">Username</label>
               </div>
             </div>
             <div class="row">
               <div class="input-field col s12">
                 <input
-                  id="definition"
-                  name="definition"
-                  type="text"
+                  id="password"
+                  name="password"
+                  type="password"
                   maxlength="200"
                   class="validate"
                   required
                 />
-                <label for="definition">Definition</label>
-              </div>
-            </div>
-            <div class="row">
-              <div class="input-field col s12">
-                <input
-                  id="example"
-                  name="example"
-                  type="text"
-                  maxlength="100"
-                  class="validate"
-                  required
-                />
-                <label for="example">Example</label>
+                <label for="password">Password</label>
               </div>
             </div>
             <div class="card-action">
@@ -56,7 +39,7 @@
                 type="submit"
                 name="action"
               >
-                Submit
+                Login
                 <i class="fa-solid fa-paper-plane"></i>
               </button>
             </div>
