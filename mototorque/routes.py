@@ -23,6 +23,14 @@ def browse():
 
 @app.route("/signup")
 def signup():
+    if request.method == "POST":
+        user = Users(
+            username=request.form.get("username"),
+            email=request.form.get("email"),
+        )
+        db.session.add(user)
+        db.session.commit()
+        return redirect(url_for("home"))
     return render_template("signup.html")
 
 
