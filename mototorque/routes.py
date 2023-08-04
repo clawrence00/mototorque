@@ -1,5 +1,6 @@
 from flask import render_template, request, redirect, url_for
 from mototorque import app, db
+from werkzeug.security import generate_password_hash
 from mototorque.models import Dictionary, Users
 
 # Routes for navigation
@@ -18,19 +19,25 @@ def browse():
         Dictionary.word_phrase.startswith(selected_letter)).all())
     return render_template("browse.html", letter=selected_letter, words=words)
 
-# Routes for user
+# Routes for Users
 
 
-@app.route("/signup")
+@app.route("/signup", methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
-        user = Users(
-            username=request.form.get("username"),
-            email=request.form.get("email"),
-        )
-        db.session.add(user)
-        db.session.commit()
-        return redirect(url_for("home"))
+        user = Users.query.filter_by(email=request.form.get("email")).first()
+        if user is None:
+            # Hash the password
+            hashed_password = generate_password_hash(
+                request.form.get("password_hash"), "sha256")
+            user = Users(
+                username=request.form.get("username"),
+                email=request.form.get("email"),
+                password_hash=hashed_password
+            )
+            db.session.add(user)
+            db.session.commit()
+            return render_template("signup.html", user=user)
     return render_template("signup.html")
 
 
@@ -38,7 +45,7 @@ def signup():
 def enter_user():
     return render_template("enter_user.html")
 
-# Routes for CRUD records
+# Routes for Dicitonary
 
 
 @app.route("/add_word", methods=["GET", "POST"])
