@@ -19,28 +19,28 @@ def browse():
         Dictionary.word_phrase.startswith(selected_letter)).all())
     return render_template("browse.html", letter=selected_letter, words=words)
 
-# Routes for Users
-
-
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
-    our_user = list(Users.query.order_by(Users.id).all())
-    return render_template("signup.html", our_user=our_user)
+    our_users = list(Users.query.order_by(Users.id).all())
+    return render_template("signup.html", our_users=our_users)
+
+# Routes for Users
 
 @app.route("/add_user", methods=["GET", "POST"])
 def add_user():
     if request.method == "POST":
-        user = Users.query.filter_by(email=request.form.get("email")).all()
+        user = Users.query.filter_by(email=request.form.get("email")).first()
         if user is None:
+            hash_password = generate_password_hash(request.form.get("password_hash"))
             user = Users(
             username=request.form.get("username"),
             email=request.form.get("email"),
-            password_hash=request.form.get("password_hash")
+            password_hash=hash_password
             )
             db.session.add(user)
             db.session.commit()
             return redirect(url_for("enter_user"))
-        return redirect(url_for("home"))
+    return redirect(url_for("home"))
 
 
 @app.route("/enter_user")

@@ -64,12 +64,12 @@
 </div>
 
 <div>
-
+{% for our_user in our_users %}
   <p>{{ our_user.id }}</p>
   <p>{{ our_user.username }}</p>
   <p>{{ our_user.email }}</p>
   <p>{{ our_user.password_hash }}</p>
-
+{% endfor %}
 </div>
 
 {% endblock %}
