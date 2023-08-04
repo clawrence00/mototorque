@@ -24,22 +24,23 @@ def browse():
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
+    our_user = list(Users.query.order_by(Users.id).all())
+    return render_template("signup.html", our_user=our_user)
+
+@app.route("/add_user", methods=["GET", "POST"])
+def add_user():
     if request.method == "POST":
-        user = Users.query.filter_by(email=request.form.get("email")).first()
+        user = Users.query.filter_by(email=request.form.get("email")).all()
         if user is None:
-            # Hash the password
-            hashed_password = generate_password_hash(
-                request.form.get("password_hash"), "scrypt")
             user = Users(
-                username=request.form.get("username"),
-                email=request.form.get("email"),
-                password_hash=hashed_password
+            username=request.form.get("username"),
+            email=request.form.get("email"),
+            password_hash=request.form.get("password_hash")
             )
             db.session.add(user)
             db.session.commit()
-            return redirect(url_for("signup"))
-    our_user = list(Users.query.order_by(Users.id).all())
-    return render_template("signup.html", our_user=our_user)
+            return redirect(url_for("enter_user"))
+        return redirect(url_for("home"))
 
 
 @app.route("/enter_user")
