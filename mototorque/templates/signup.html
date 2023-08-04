@@ -63,15 +63,14 @@
   </div>
 </div>
 
-<table class="table table-hover table-bordered table-striped">
+<div>
   {% for our_user in our_users %}
-  <tr>
-    <td>
-      {{ our_user.id }} - {{ our_user.username }} - {{ our_user.email }} - {{
-      our_user.password_hash }}
-    </td>
-  </tr>
+  <p>{{ our_user.id }}</p>
+  <p>{{ our_user.username }}</p>
+  <p>{{ our_user.email }}</p>
+  <p>{{ our_user.password_hash }}</p>
+
   {% endfor %}
-</table>
+</div>
 
 {% endblock %}

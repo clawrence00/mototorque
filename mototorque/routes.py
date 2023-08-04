@@ -29,7 +29,7 @@ def signup():
         if user is None:
             # Hash the password
             hashed_password = generate_password_hash(
-                request.form.get("password_hash"), "sha256")
+                request.form.get("password_hash"), "scrypt")
             user = Users(
                 username=request.form.get("username"),
                 email=request.form.get("email"),
@@ -37,8 +37,9 @@ def signup():
             )
             db.session.add(user)
             db.session.commit()
-            return render_template("signup.html", user=user)
-    return render_template("signup.html")
+            return redirect(url_for("signup"))
+    our_user = list(Users.query.order_by(Users.id).all())
+    return render_template("signup.html", our_user=our_user)
 
 
 @app.route("/enter_user")
