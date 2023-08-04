@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, url_for
 from mototorque import app, db
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from mototorque.models import Dictionary, Users
 
 # Routes for navigation
@@ -24,6 +25,20 @@ def signup():
     our_users = list(Users.query.order_by(Users.id).all())
     return render_template("signup.html", our_users=our_users)
 
+@app.route("/signin", methods=['GET', 'POST'])
+def signin():
+    if request.method == "POST":
+        user = Users.query.filter_by(username=request.form.get("username")).first()
+        if user:
+            if check_password_hash(user.password_hash, request.form.get("password_hash")):
+                login_user(user)
+                return redirect(url_for('add_word'))
+    return render_template("signin.html")
+
+# @app.route("/signout")
+# def signin():
+#     return render_template("signout.html")
+
 # Routes for Users
 
 @app.route("/add_user", methods=["GET", "POST"])
@@ -42,15 +57,10 @@ def add_user():
             return redirect(url_for("enter_user"))
     return redirect(url_for("home"))
 
-
-@app.route("/enter_user")
-def enter_user():
-    return render_template("enter_user.html")
-
 # Routes for Dicitonary
 
-
 @app.route("/add_word", methods=["GET", "POST"])
+@login_required
 def add_word():
     if request.method == "POST":
         word = Dictionary(
@@ -82,3 +92,14 @@ def delete_word(word_id):
     db.session.delete(word)
     db.session.commit()
     return redirect(url_for("home"))
+
+
+# login manager
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'signin'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return Users.query.get(int(user_id))

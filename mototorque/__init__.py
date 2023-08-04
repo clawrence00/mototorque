@@ -19,6 +19,6 @@ else:
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
-login_manager = LoginManager()
 
 from mototorque import routes  # noqa
+
