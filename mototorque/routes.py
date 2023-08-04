@@ -1,8 +1,9 @@
 from flask import render_template, request, redirect, url_for
 from mototorque import app, db
+from mototorque.models import Dictionary, Users
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
-from mototorque.models import Dictionary, Users
+
 
 # Routes for navigation
 
@@ -12,13 +13,7 @@ def home():
     return render_template("index.html")
 
 
-@ app.route('/browse', methods=['GET', 'POST'])
-def browse():
-    selected_letter = request.args.get('type')
-    print(selected_letter)  # <-- should print letter
-    words = list(Dictionary.query.filter(
-        Dictionary.word_phrase.startswith(selected_letter)).all())
-    return render_template("browse.html", letter=selected_letter, words=words)
+
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
@@ -50,15 +45,15 @@ def add_user():
             )
             db.session.add(user)
             db.session.commit()
-            return redirect(url_for("enter_user"))
+            return redirect(url_for("signin"))
     return redirect(url_for("home"))
 
-# Routes for Dicitonary
+# Routes for Dictionary
 
 @app.route("/add_word", methods=["GET", "POST"])
-@login_required
 def add_word():
     if request.method == "POST":
+
         word = Dictionary(
             word_phrase=request.form.get("word_phrase"),
             definition=request.form.get("definition"),
@@ -106,3 +101,11 @@ def load_user(user_id):
 def signout():
     logout_user()
     return redirect(url_for("signin"))
+
+@ app.route('/browse', methods=['GET', 'POST'])
+def browse():
+    selected_letter = request.args.get('type')
+    print(selected_letter)  # <-- should print letter
+    words = list(Dictionary.query.filter(
+        Dictionary.word_phrase.startswith(selected_letter)).all())
+    return render_template("browse.html", letter=selected_letter, words=words)
