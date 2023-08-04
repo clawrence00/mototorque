@@ -35,10 +35,6 @@ def signin():
                 return redirect(url_for('add_word'))
     return render_template("signin.html")
 
-# @app.route("/signout")
-# def signin():
-#     return render_template("signout.html")
-
 # Routes for Users
 
 @app.route("/add_user", methods=["GET", "POST"])
@@ -103,3 +99,10 @@ login_manager.login_view = 'signin'
 @login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
+
+#logout function
+@app.route("/signout", methods=["GET", "POST"])
+@login_required
+def signout():
+    logout_user()
+    return redirect(url_for("signin"))
