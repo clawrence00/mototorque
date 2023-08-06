@@ -6,7 +6,11 @@
       <div class="card-content white-text">
         <span class="card-title">Enter your details to sign up!</span>
         <div class="row">
-          <form class="col s12" method="POST" action="{{ url_for('add_user') }}">
+          <form
+            class="col s12"
+            method="POST"
+            action="{{ url_for('add_user') }}"
+          >
             <div class="row">
               <div class="input-field col s12">
                 <input
@@ -64,12 +68,17 @@
 </div>
 
 <div>
-{% for our_user in our_users %}
+  {% for our_user in our_users %}
   <p>{{ our_user.id }}</p>
   <p>{{ our_user.username }}</p>
   <p>{{ our_user.email }}</p>
   <p>{{ our_user.password_hash }}</p>
-{% endfor %}
+  <a
+    href=" {{ url_for('delete_user', user_id=our_user.id) }}"
+    class="btn waves-effect waves-red delete_link"
+    >Delete</a
+  >
+  {% endfor %}
 </div>
 
 {% endblock %}

@@ -21,4 +21,3 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
 from mototorque import routes  # noqa
-
