@@ -1,0 +1,16 @@
+alembic==1.11.1
+blinker==1.6.2
+click==8.1.6
+DateTime==5.2
+Flask==2.3.2
+Flask-Login==0.6.2
+Flask-Migrate==4.0.4
+Flask-SQLAlchemy==2.5.1
+greenlet==2.0.2
+itsdangerous==2.1.2
+Mako==1.2.4
+psycopg2==2.9.6
+pytz==2023.3
+SQLAlchemy==1.4.46
+Werkzeug==2.3.6
+zope.interface==6.0
