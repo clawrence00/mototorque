@@ -11,7 +11,10 @@
         <br />
         <p><em>{{ word.example }}</em></p>
         <br />
-        <p>By {{ word.poster.username }}. Added on {{ word.date_posted }}</p>
+        <p>
+          By {% if word.poster.username == Null %}Deleted User{% else %} {{
+          word.poster.username }}{% endif %}. Added on {{ word.date_posted }}
+        </p>
       </div>
       <div class="card-action">
         {% if current_user.username == "admin" %}
