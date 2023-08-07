@@ -51,8 +51,12 @@
                 >Add +</a
               >
             </li>
-            <li><a href="{{ url_for('signin') }}">Login</a></li>
+            {% if current_user.username == "admin" %}
+            <li><a href="{{ url_for('admin') }}">Admin</a></li>
+            {% endif %} {% if current_user.is_authenticated %}
             <li><a href="{{ url_for('signout') }}">Logout</a></li>
+            {% else %}
+            <li><a href="{{ url_for('signin') }}">Login</a></li>
             <li>
               <a
                 href="{{ url_for('signup') }}"
@@ -60,6 +64,7 @@
                 >Sign Up!</a
               >
             </li>
+            {% endif %}
           </ul>
         </div>
       </nav>
@@ -79,8 +84,12 @@
             >Add +</a
           >
         </li>
+        {% if current_user.username == "admin" %}
+        <li><a href="{{ url_for('admin') }}">Admin</a></li>
+        {% endif %} {% if current_user.is_authenticated %}
+        <li><a href="{{ url_for('signout') }}">Logout</a></li>
+        {% else %}
         <li><a href="{{ url_for('signin') }}">Login</a></li>
-        <li><a href="#">Logout</a></li>
         <li>
           <a
             href="{{ url_for('signup') }}"
@@ -88,6 +97,7 @@
             >Sign Up!</a
           >
         </li>
+        {% endif %}
       </ul>
     </header>
 
@@ -145,7 +155,7 @@
             <td><a href="{{url_for('browse', type='7')}}">7</a></td>
             <td><a href="{{url_for('browse', type='8')}}">8</a></td>
             <td><a href="{{url_for('browse', type='9')}}">9</a></td>
-            <td><a href="{{url_for('browse', type='all')}}">All</a></td>
+            <td><a href="{{url_for('browse', type='All')}}">All</a></td>
           </tr>
         </table>
       </div>

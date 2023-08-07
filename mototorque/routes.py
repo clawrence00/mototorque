@@ -2,7 +2,7 @@ from flask import render_template, request, redirect, url_for
 from mototorque import app, db
 from mototorque.models import Dictionary, Users
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import login_user, LoginManager, login_required, logout_user, current_user
+from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 
 
 # Routes for navigation
@@ -15,8 +15,16 @@ def home():
 
 @app.route("/signup")
 def signup():
-    our_users = list(Users.query.order_by(Users.id).all())
-    return render_template("signup.html", our_users=our_users)
+    return render_template("signup.html")
+
+
+@app.route("/admin")
+@login_required
+def admin():
+    if current_user.username == "admin":
+        our_users = list(Users.query.order_by(Users.id).all())
+        return render_template('admin.html', our_users=our_users)
+    return render_template('home.html')
 
 
 @app.route("/signin", methods=['GET', 'POST'])
@@ -27,7 +35,7 @@ def signin():
         if user:
             if check_password_hash(user.password_hash, request.form.get("password_hash")):
                 login_user(user)
-                return redirect(url_for('add_word'))
+                return redirect(url_for('home'))
     return render_template("signin.html")
 
 
@@ -35,9 +43,9 @@ def signin():
 def browse():
     selected_letter = request.args.get('type')
     print(selected_letter)  # <-- should print letter
-    if selected_letter == "all":
+    if selected_letter == "All":
         words = list(Dictionary.query.order_by(Dictionary.id).all())
-        return render_template("browse.html", words=words)
+        return render_template("browse.html", letter=selected_letter, words=words)
     words = list(Dictionary.query.filter(
         Dictionary.word_phrase.startswith(selected_letter)).all())
     return render_template("browse.html", letter=selected_letter, words=words)
@@ -68,12 +76,13 @@ def delete_user(user_id):
     user = Users.query.get_or_404(user_id)
     db.session.delete(user)
     db.session.commit()
-    return redirect(url_for("signup"))
+    return redirect(url_for("admin"))
 
 # Routes for Dictionary
 
 
 @app.route("/add_word", methods=["GET", "POST"])
+@login_required
 def add_word():
     if request.method == "POST":
         entry = Dictionary(
@@ -83,7 +92,7 @@ def add_word():
         )
         db.session.add(entry)
         db.session.commit()
-        return redirect(url_for("signin"))
+        return redirect(url_for("home"))
     return render_template("add.html")
 
 
