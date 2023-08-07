@@ -24,7 +24,7 @@ def admin():
     if current_user.username == "admin":
         our_users = list(Users.query.order_by(Users.id).all())
         return render_template('admin.html', our_users=our_users)
-    return render_template('home.html')
+    return render_template('index.html')
 
 
 @app.route("/signin", methods=['GET', 'POST'])
@@ -46,23 +46,23 @@ def browse():
     selected = request.args.get('type')
     print(selected)  # <-- should print letter
     if selected == "All":
-        words = list(Dictionary.query.order_by(Dictionary.id).all())
+        words = list(Dictionary.query.order_by(Dictionary.word_phrase).all())
         return render_template("browse.html", letter=selected, words=words)
     words = list(Dictionary.query.filter(
-        Dictionary.word_phrase.startswith(selected)).all())
+        Dictionary.word_phrase.ilike(f'{selected}%')).all())
     return render_template("browse.html", letter=selected, words=words)
 
 # Routes for Users
 
 
-@app.route("/add_user", methods=["GET", "POST"])
+@ app.route("/add_user", methods=["GET", "POST"])
 def add_user():
     if request.method == "POST":
-        user = Users.query.filter_by(email=request.form.get("email")).first()
+        user=Users.query.filter_by(email=request.form.get("email")).first()
         if user is None:
-            hash_password = generate_password_hash(
+            hash_password=generate_password_hash(
                 request.form.get("password_hash"))
-            user = Users(
+            user=Users(
                 username=request.form.get("username"),
                 email=request.form.get("email"),
                 password_hash=hash_password
@@ -73,9 +73,9 @@ def add_user():
     return redirect(url_for("home"))
 
 
-@app.route("/delete_user/<int:user_id>", methods=["GET", "POST"])
+@ app.route("/delete_user/<int:user_id>", methods=["GET", "POST"])
 def delete_user(user_id):
-    user = Users.query.get_or_404(user_id)
+    user=Users.query.get_or_404(user_id)
     db.session.delete(user)
     db.session.commit()
     return redirect(url_for("admin"))
@@ -83,12 +83,12 @@ def delete_user(user_id):
 # Routes for Dictionary
 
 
-@app.route("/add_word", methods=["GET", "POST"])
-@login_required
+@ app.route("/add_word", methods=["GET", "POST"])
+@ login_required
 def add_word():
     if request.method == "POST":
         poster=current_user.id
-        entry = Dictionary(
+        entry=Dictionary(
             word_phrase=request.form.get("word_phrase"),
             definition=request.form.get("definition"),
             example=request.form.get("example"),
@@ -100,21 +100,21 @@ def add_word():
     return render_template("add.html")
 
 
-@app.route("/edit_word/<int:word_id>", methods=["GET", "POST"])
+@ app.route("/edit_word/<int:word_id>", methods=["GET", "POST"])
 def edit_word(word_id):
-    word = Dictionary.query.get_or_404(word_id)
+    word=Dictionary.query.get_or_404(word_id)
     if request.method == "POST":
-        word.word_phrase = request.form.get("word_phrase"),
-        word.definition = request.form.get("definition"),
-        word.example = request.form.get("example"),
+        word.word_phrase=request.form.get("word_phrase"),
+        word.definition=request.form.get("definition"),
+        word.example=request.form.get("example"),
         db.session.commit()
         return render_template("index.html")
     return render_template("edit.html", word=word)
 
 
-@app.route("/delete_word/<int:word_id>", methods=["GET", "POST"])
+@ app.route("/delete_word/<int:word_id>", methods=["GET", "POST"])
 def delete_word(word_id):
-    word = Dictionary.query.get_or_404(word_id)
+    word=Dictionary.query.get_or_404(word_id)
     db.session.delete(word)
     db.session.commit()
     return redirect(url_for("browse", type="All"))
@@ -122,20 +122,20 @@ def delete_word(word_id):
 
 # login manager
 
-login_manager = LoginManager()
+login_manager=LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'signin'
+login_manager.login_view='signin'
 
 
-@login_manager.user_loader
+@ login_manager.user_loader
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
 # logout function
 
 
-@app.route("/signout", methods=["GET", "POST"])
-@login_required
+@ app.route("/signout", methods=["GET", "POST"])
+@ login_required
 def signout():
     logout_user()
     return redirect(url_for("signin"))
