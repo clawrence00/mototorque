@@ -18,29 +18,6 @@ def signup():
     return render_template("signup.html")
 
 
-@app.route("/admin")
-@login_required
-def admin():
-    if current_user.username == "admin":
-        our_users = list(Users.query.order_by(Users.id).all())
-        return render_template('admin.html', our_users=our_users)
-    return render_template('index.html')
-
-
-@app.route("/signin", methods=['GET', 'POST'])
-def signin():
-    if request.method == "POST":
-        user = Users.query.filter_by(
-            username=request.form.get("username")).first()
-        if user:
-            if check_password_hash(user.password_hash, request.form.get("password_hash")):
-                login_user(user)
-                if current_user.username == "admin":
-                    return redirect(url_for('admin'))
-                return redirect(url_for('signin'))
-    return render_template('signin.html')
-
-
 @ app.route('/browse', methods=['GET', 'POST'])
 def browse():
     selected = request.args.get('type')
@@ -59,21 +36,25 @@ def browse():
 def add_user():
     if request.method == "POST":
         user=Users.query.filter_by(email=request.form.get("email")).first()
+        username=Users.query.filter_by(username=request.form.get("username")).first()
         if user is None:
-            hash_password=generate_password_hash(
-                request.form.get("password_hash"))
-            user=Users(
-                username=request.form.get("username"),
-                email=request.form.get("email"),
-                password_hash=hash_password
-            )
-            db.session.add(user)
-            db.session.commit()
-            return redirect(url_for("signin"))
-    return redirect(url_for("home"))
+            if username is None:
+                hash_password=generate_password_hash(
+                    request.form.get("password_hash"))
+                user=Users(
+                    username=request.form.get("username"),
+                    email=request.form.get("email"),
+                    password_hash=hash_password
+                )
+                db.session.add(user)
+                db.session.commit()
+                return redirect(url_for("signin"))
+            return render_template("sorry3.html")
+    return render_template("sorry2.html")
 
 
 @ app.route("/delete_user/<int:user_id>", methods=["GET", "POST"])
+@login_required
 def delete_user(user_id):
     user=Users.query.get_or_404(user_id)
     db.session.delete(user)
@@ -101,6 +82,7 @@ def add_word():
 
 
 @ app.route("/edit_word/<int:word_id>", methods=["GET", "POST"])
+@login_required
 def edit_word(word_id):
     word=Dictionary.query.get_or_404(word_id)
     if request.method == "POST":
@@ -113,6 +95,7 @@ def edit_word(word_id):
 
 
 @ app.route("/delete_word/<int:word_id>", methods=["GET", "POST"])
+@login_required
 def delete_word(word_id):
     word=Dictionary.query.get_or_404(word_id)
     db.session.delete(word)
@@ -131,7 +114,31 @@ login_manager.login_view='signin'
 def load_user(user_id):
     return Users.query.get(int(user_id))
 
-# logout function
+# login, logout and admin functions
+
+
+@app.route("/admin")
+@login_required
+def admin():
+    if current_user.username == "admin":
+        our_users = list(Users.query.order_by(Users.id).all())
+        return render_template('admin.html', our_users=our_users)
+    return render_template('index.html')
+
+
+@app.route("/signin", methods=['GET', 'POST'])
+def signin():
+    if request.method == "POST":
+        user = Users.query.filter_by(
+            username=request.form.get("username")).first()
+        if user:
+            if check_password_hash(user.password_hash, request.form.get("password_hash")):
+                login_user(user)
+                if current_user.username == "admin":
+                    return redirect(url_for('admin'))
+                return redirect(url_for('signin'))
+        return render_template('sorry.html')
+    return render_template('signin.html')
 
 
 @ app.route("/signout", methods=["GET", "POST"])
