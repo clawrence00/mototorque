@@ -11,9 +11,10 @@
         <br />
         <p><em>{{ word.example }}</em></p>
         <br />
-        <p>{{ word.poster.username }}</p>
+        <p>By {{ word.poster.username }}. Added on {{ word.date_posted }}</p>
       </div>
       <div class="card-action">
+        {% if current_user.username == "admin" %}
         <a
           href="{{ url_for('edit_word', word_id=word.id) }}"
           class="btn waves-effect waves edit_link"
@@ -24,6 +25,18 @@
           class="btn waves-effect waves-red delete_link modal-trigger"
           >Delete</a
         >
+        {% elif word.user_id == current_user.id %}
+        <a
+          href="{{ url_for('edit_word', word_id=word.id) }}"
+          class="btn waves-effect waves edit_link"
+          >Edit</a
+        >
+        <a
+          href="#delete_modal"
+          class="btn waves-effect waves-red delete_link modal-trigger"
+          >Delete</a
+        >
+        {% endif %}
       </div>
     </div>
   </div>

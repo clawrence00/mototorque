@@ -35,20 +35,22 @@ def signin():
         if user:
             if check_password_hash(user.password_hash, request.form.get("password_hash")):
                 login_user(user)
+                if current_user.username == "admin":
+                    return redirect(url_for('admin'))
                 return redirect(url_for('home'))
     return render_template("signin.html")
 
 
 @ app.route('/browse', methods=['GET', 'POST'])
 def browse():
-    selected_letter = request.args.get('type')
-    print(selected_letter)  # <-- should print letter
-    if selected_letter == "All":
+    selected = request.args.get('type')
+    print(selected)  # <-- should print letter
+    if selected == "All":
         words = list(Dictionary.query.order_by(Dictionary.id).all())
-        return render_template("browse.html", letter=selected_letter, words=words)
+        return render_template("browse.html", letter=selected, words=words)
     words = list(Dictionary.query.filter(
-        Dictionary.word_phrase.startswith(selected_letter)).all())
-    return render_template("browse.html", letter=selected_letter, words=words)
+        Dictionary.word_phrase.startswith(selected)).all())
+    return render_template("browse.html", letter=selected, words=words)
 
 # Routes for Users
 
@@ -85,10 +87,12 @@ def delete_user(user_id):
 @login_required
 def add_word():
     if request.method == "POST":
+        poster=current_user.id
         entry = Dictionary(
             word_phrase=request.form.get("word_phrase"),
             definition=request.form.get("definition"),
-            example=request.form.get("example")
+            example=request.form.get("example"),
+            user_id=poster
         )
         db.session.add(entry)
         db.session.commit()
@@ -113,7 +117,7 @@ def delete_word(word_id):
     word = Dictionary.query.get_or_404(word_id)
     db.session.delete(word)
     db.session.commit()
-    return redirect(url_for("home"))
+    return redirect(url_for("browse", type="All"))
 
 
 # login manager
