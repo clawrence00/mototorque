@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, flash
 from mototorque import app, db
 from mototorque.models import Dictionary, Users
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -37,8 +37,8 @@ def signin():
                 login_user(user)
                 if current_user.username == "admin":
                     return redirect(url_for('admin'))
-                return redirect(url_for('home'))
-    return render_template("signin.html")
+                return redirect(url_for('signin'))
+    return render_template('signin.html')
 
 
 @ app.route('/browse', methods=['GET', 'POST'])
@@ -96,7 +96,7 @@ def add_word():
         )
         db.session.add(entry)
         db.session.commit()
-        return redirect(url_for("home"))
+        return render_template("added.html")
     return render_template("add.html")
 
 
@@ -108,7 +108,7 @@ def edit_word(word_id):
         word.definition=request.form.get("definition"),
         word.example=request.form.get("example"),
         db.session.commit()
-        return render_template("index.html")
+        return render_template("edited.html")
     return render_template("edit.html", word=word)
 
 
@@ -138,4 +138,4 @@ def load_user(user_id):
 @ login_required
 def signout():
     logout_user()
-    return redirect(url_for("signin"))
+    return render_template("signout.html")

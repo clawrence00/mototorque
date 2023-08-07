@@ -4,7 +4,14 @@
   <div class="col s12">
     <div class="card blue-grey darken-3">
       <div class="card-content white-text">
-        <span class="card-title">Enter your details to log in!</span>
+        {% if current_user.is_authenticated %}
+        <span class="card-title"
+          >Hello {{ current_user.username }} you are logged in!</span
+        >
+        {% else %}
+        <span class="card-title"
+          >Please enter your log in details to continue</span
+        >
         <div class="row">
           <form class="col s12" method="POST" action="{{ url_for('signin') }}">
             <div class="row">
@@ -45,6 +52,7 @@
             </div>
           </form>
         </div>
+        {% endif %}
       </div>
     </div>
   </div>
