@@ -62,4 +62,22 @@ input {
     table {
         font-size: 12px;
     }
+
+    .btn-small {
+        padding: 0px 4px;
+        font-size: 12px;
+    }
+}
+
+@media only screen and (max-width: 450px) {
+
+    /* For very small screens: */
+    table {
+        font-size: 9px;
+    }
+
+    .btn-small {
+        padding: 0px 2px;
+        font-size: 9px;
+    }
 }
