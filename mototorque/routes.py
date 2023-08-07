@@ -100,7 +100,7 @@ def delete_word(word_id):
     word=Dictionary.query.get_or_404(word_id)
     db.session.delete(word)
     db.session.commit()
-    return redirect(url_for("browse", type="All"))
+    return render_template("deleted.html")
 
 
 # login manager
