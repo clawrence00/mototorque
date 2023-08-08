@@ -1,6 +1,6 @@
 # Milestone Project 3: Moto Torque
 
-![Mockup on different screen sizes of home page](#)
+![Mockup on different screen sizes of home page](https://github.com/clawrence00/mototorque/blob/main/docs/images/mockup.png)
 Welcome to my third milestone project with the Code Institute. The purpose of this project it to build a full-stack site that allows your users to manage a common dataset about a particular domain. I have chosen to create a dictionary for motorcyling words and phrases. Users can sign up, add there own entries, edit and delete them. The definitions can then be displayed by all users.
 
 <!-- **Please find my deployed site [here](https://mototorque-c015422a9ebb.herokuapp.com/).** -->
@@ -71,13 +71,13 @@ The webpage must be responsive so that it can be experienced on mobile, tablet a
 
 Before any code was written wireframes were created using [Balsamiq](https://balsamiq.com/) for each page on three different screen sizes; mobile, tablet and desktop.
 
-[See all wireframes here](https://github.com/clawrence00/capitals_quiz/blob/main/documentation/images/#)
+[See all wireframes here](https://github.com/clawrence00/mototorque/blob/main/docs/wireframes.pdf)
 
 ### Data Schema
 
 The following data schema has been created to show the relationship between the data models and the entities within those models.
 
-![Data schema](https://github.com/clawrence00/mototorque/blob/main/docs/images/Data%20schema.png)
+![Data schema](https://github.com/clawrence00/mototorque/blob/main/docs/images/data_schema.png)
 
 The relationship is one to many. The user can have many records created in the dictionary. As the dictionary is user generated many users can also created definitions for the same word or phrase, therefore it is also a many to one relationship. With this relationship it can be established which user created the dictionary record allowing this to be diplayed on the card.
 
