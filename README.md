@@ -73,6 +73,13 @@ Before any code was written wireframes were created using [Balsamiq](https://bal
 
 [See all wireframes here](https://github.com/clawrence00/capitals_quiz/blob/main/documentation/images/#)
 
+### Data Schema
+
+The following data schema has been created to show the relationship between the data models and the entities within those models.
+
+![Data schema](docs/images/Data schema.png)
+
+
 ### Design Choices
 
 For the majority of design choices inspiration was taken from motorcycle manufacturers such as Triumph, Harley Davidson, Yamaha & Kawasaki.
@@ -125,14 +132,20 @@ This youtube video from Corey Schafer was also used to establish flask-login fuc
 
 Several sources helped me build the code for the 'browse' route;
 
-Rendering a page based on teh link clicked
+Rendering a page based on the link clicked
+
 - [Answer from Ali Yılmaz](https://stackoverflow.com/questions/50426137/flask-get-clicked-link-info-and-display-on-rendered-page)
+  
 Filtering database values based on their first letter.
+
 - [Answer from John Lehmann](https://stackoverflow.com/questions/20269260/how-do-i-do-a-starts-with-query-using-sql-alchemy)
+  
 This fixed an issue where only database entries with capital letters would be shown when browsing by a specific letter.
+
 - [Answer from Haleemur Ali](https://stackoverflow.com/questions/30272217/use-variable-in-sqlalchemy-ilike-statement)
 
-The solution for the failed test in the testing section below (deleting the incorrect record when using a modal) wasquickly found after watching this video.
+The solution for the failed test in the testing section below (deleting the incorrect record when using a modal) was quickly found after watching this video.
+
 - [ParwizForogh](https://youtu.be/XTpLbBJTOM4?t=3911)
 
  ---
