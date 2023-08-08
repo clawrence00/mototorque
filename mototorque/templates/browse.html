@@ -25,7 +25,7 @@
           >Edit</a
         >
         <a
-          href="#delete_modal"
+          href="#delete_modal{{ word.id }}"
           class="btn waves-effect waves-red delete_link modal-trigger"
           >Delete</a
         >
@@ -36,7 +36,7 @@
           >Edit</a
         >
         <a
-          href="#delete_modal"
+          href="#delete_modal{{ word.id }}"
           class="btn waves-effect waves-red delete_link modal-trigger"
           >Delete</a
         >
@@ -45,7 +45,7 @@
     </div>
   </div>
   <!-- Modal for delete button -->
-  <div id="delete_modal" class="modal">
+  <div id="delete_modal{{ word.id }}" class="modal">
     <div class="modal-content">
       <h4>Warning!</h4>
       <p>Are you sure you want to delete this?</p>
