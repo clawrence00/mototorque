@@ -192,6 +192,8 @@ The CSS was checked using the [W3C CSS validation service](https://jigsaw.w3.org
 
 Google Lighthouse was used on the mobile version of the home page. The initial findings for accessibility were not 100% due to an aria-label not being present on the mobile sidenav trigger button. This was added, along with a meta tag to described the web application for better search engine optimisation.
 
+I have pasted the text from the .py files into [Code Institutes python linter](https://pep8ci.herokuapp.com/) which checks for conformity to PEP8 style guides. There were mulitple instances of missing white space around operators and lines that were too long. These have been corrected.
+
 All evidence of the validation can be found in the [validation](https://github.com/clawrence00/mototorque/tree/main/docs/validation) folder.
 
 ---
