@@ -37,6 +37,7 @@ Welcome to my third milestone project with the Code Institute. The purpose of th
 - codeanywhere
 - Heroku
 - ElephantSQL
+- PostgreSQL
 
 ---
 
@@ -52,10 +53,10 @@ Users can share their own words or phrases about motorcycling to the rest of the
 
 ### Features
 
-- Users will have be able to sign up and login, allowing them to create and edit their own data entries.
-- Users that are not logged in are able to browse the data entries added by other users but will not be able to add their own entries.
-- The username of the data entry author will be cited on the definition, giving credit to the user.
-- An administrator log on with be able to edit or delete all user's dictionary entries and delete users themselves.
+- Users will have be able to sign up and login, allowing them to create and edit their own Dictionary entries.
+- Users that are not logged in are able to browse the Dictionary entries added by other users but will not be able to add their own entries or edit or delete existing entries.
+- The username of the Dictionary entry author will be cited on the definition, giving credit to the user.
+- An administrator log on will be able to edit or delete all user's Dictionary entries and delete users themselves.
 
 ### User Stories
 
@@ -119,7 +120,7 @@ No images have been used for this application. They would likely be distracting 
 
 Where small pieces of code have been used these have been credited in comment strings near the code.
 
-The walkthrough lesson from the code institute was used for the initial set up of the coding space, the required files and installing flask and psycopg2. It was also a great base for creating the CRUD functionality that my project required.
+The walkthrough lesson from the code institute was used for the initial set up of the coding space, the required files and installing flask and psycopg2. It was also a great base for creating the CRUD functionality that my project required. The lengthy deployment process was also taken from this and added to the end of this README.
 
 - [Tim Nelson - Code Institute](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+DIWADRDB+2022_Q3/courseware/c0c31790fcf540539fd2bd3678b12406/6e44128b0b37416ab40c1a87ef2cb32a/)
 
