@@ -77,8 +77,9 @@ Before any code was written wireframes were created using [Balsamiq](https://bal
 
 The following data schema has been created to show the relationship between the data models and the entities within those models.
 
-![Data schema](docs/images/Data schema.png)
+![Data schema](https://github.com/clawrence00/mototorque/blob/main/docs/images/Data%20schema.png)
 
+The relationship is one to many. The user can have many records created in the dictionary. As the dictionary is user generated many users can also created definitions for the same word or phrase, therefore it is also a many to one relationship. With this relationship it can be established which user created the dictionary record allowing this to be diplayed on the card.
 
 ### Design Choices
 
@@ -102,13 +103,13 @@ The styling has been created using Materialize CSS. Cards have been used through
 
 No images have been used for this application. They would likely be distracting and not what you would typically find on an online dictionary web application unless they were user added images to reinforce definitions.
 
-![Home page](documentation/images/#)
+![Home page](https://github.com/clawrence00/mototorque/blob/main/docs/images/home_page.png)
 
-![Browse Modal](documentation/images/#)
+![Browse Modal](https://github.com/clawrence00/mototorque/blob/main/docs/images/browse_modal.png)
 
-![Browse all](documentation/images/#)
+![Browse all](https://github.com/clawrence00/mototorque/blob/main/docs/images/browse_all.png)
 
-![Browse by letter](documentation/images/#)
+![Browse by letter R](https://github.com/clawrence00/mototorque/blob/main/docs/images/browse_r.png)
 
 ---
 
@@ -122,7 +123,7 @@ The walkthrough lesson from the code institute was used for the initial set up o
 
 - [Tim Nelson - Code Institute](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+DIWADRDB+2022_Q3/courseware/c0c31790fcf540539fd2bd3678b12406/6e44128b0b37416ab40c1a87ef2cb32a/)
 
-This youtube playlist from John Elder at Codemy was really helpful, particularly for installing flask-migrate and flask-login. Code snippets and naming conventions were taken from this project:
+This youtube playlist from John Elder at Codemy was really helpful, particularly for installing flask-migrate, flask-login and hashing passwords. Code snippets and naming conventions were taken from this project:
 
 - [John Elder - Codemy](https://www.youtube.com/playlist?list=PLCC34OHNcOtolz2Vd9ZSeSXWc8Bq23yEz)
 
