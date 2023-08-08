@@ -27,8 +27,8 @@ def browse():
         words = list(Dictionary.query.order_by(Dictionary.word_phrase).all())
         return render_template("browse.html", letter=selected, words=words)
     words = list(Dictionary.query.filter(
-        Dictionary.word_phrase.ilike(f'{selected}%'))
-        .order_by\(Dictionary.word_phrase).all())
+        Dictionary.word_phrase.ilike(
+            f'{selected}%')).order_by\(Dictionary.word_phrase).all())
     return render_template("browse.html", letter=selected, words=words)
 
 # Routes for Users
