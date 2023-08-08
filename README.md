@@ -111,18 +111,29 @@ No images have been used for this application. They would likely be distracting 
 
 Where small pieces of code have been used these have been credited in comment strings near the code.
 
-The following sources were used to establish the quiz functions and questions array:
+The walkthrough lesson from the code institute was used for the initial set up of the coding space, the required files and installing flask and psycopg2. It was also a greate base for creating the CRUD functionality that my project required.
 
-- [caption](link)
-- [Web Dev Simplified](https://www.youtube.com/watch?v=riDzcEQbX6k&ab_channel=WebDevSimplified)
+- [Tim Nelson - Code Institute](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+DIWADRDB+2022_Q3/courseware/c0c31790fcf540539fd2bd3678b12406/6e44128b0b37416ab40c1a87ef2cb32a/)
 
-This tutorial was used to create the function delay:
+This youtube playlist from John Elder at Codemy was really helpful, particularly for installing flask-migrate and flask-login. Code snippets and naming conventions were taken from this project:
 
-- [Prince Varshney - tutorialspoint](https://www.tutorialspoint.com/How-to-delay-a-JavaScript-function-call-using-JavaScript)
+- [John Elder - Codemy](https://www.youtube.com/playlist?list=PLCC34OHNcOtolz2Vd9ZSeSXWc8Bq23yEz)
 
-For incrementing the correct answer score I revisited this Code Institute lesson:
+This youtube video from Corey Schafer was also used to establish flask-login fuctionality.
 
-- [AJGreaves - CodeInstitute](https://github.com/Code-Institute-Solutions/love-maths-2.0-sourcecode/tree/master/03-displaying-the-question-and-answer/04-updating-the-scores)
+- [Corey Schafer](https://www.youtube.com/watch?v=CSHx6eCkmv0&ab_channel=CoreySchafer)
+
+Several sources helped me build the code for the 'browse' route;
+
+Rendering a page based on teh link clicked
+- [Answer from Ali Yılmaz](https://stackoverflow.com/questions/50426137/flask-get-clicked-link-info-and-display-on-rendered-page)
+Filtering database values based on their first letter.
+- [Answer from John Lehmann](https://stackoverflow.com/questions/20269260/how-do-i-do-a-starts-with-query-using-sql-alchemy)
+This fixed an issue where only database entries with capital letters would be shown when browsing by a specific letter.
+- [Answer from Haleemur Ali](https://stackoverflow.com/questions/30272217/use-variable-in-sqlalchemy-ilike-statement)
+
+The solution for the failed test in the testing section below (deleting the incorrect record when using a modal) wasquickly found after watching this video.
+- [ParwizForogh](https://youtu.be/XTpLbBJTOM4?t=3911)
 
  ---
 
@@ -164,7 +175,7 @@ The CSS was checked using the [W3C CSS validation service](https://jigsaw.w3.org
 
 Google Lighthouse was used on the mobile version of the home page. The initial findings for accessibility were not 100% due to an aria-label not being present on the mobile sidenav trigger button. This was added, along with a meta tag to described the web application for better search engine optimisation.
 
-All evidence of the validation can be found in the [validation](#) folder.
+All evidence of the validation can be found in the [validation](https://github.com/clawrence00/mototorque/tree/main/docs/validation) folder.
 
 ---
 
