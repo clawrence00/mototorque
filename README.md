@@ -1,4 +1,4 @@
-# Milestone Project 2: Capitals Around the World
+# Milestone Project 3: Moto Torque
 
 ![Mockup on different screen sizes of home page](#)
 Welcome to my third milestone project with the Code Institute. The purpose of this project it to build a full-stack site that allows your users to manage a common dataset about a particular domain. I have chosen to create a dictionary for motorcyling words and phrases. Users can sign up, add there own entries, edit and delete them. The definitions can then be displayed by all users.
