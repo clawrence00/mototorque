@@ -3,7 +3,7 @@
 ![Mockup on different screen sizes of home page](https://github.com/clawrence00/mototorque/blob/main/docs/images/mockup.png)
 Welcome to my third milestone project with the Code Institute. The purpose of this project it to build a full-stack site that allows your users to manage a common dataset about a particular domain. I have chosen to create a dictionary for motorcyling words and phrases. Users can sign up, add there own entries, edit and delete them. The definitions can then be displayed by all users.
 
-<!-- **Please find my deployed site [here](https://mototorque-c015422a9ebb.herokuapp.com/).** -->
+**Please find my deployed site [here](https://mototorque-c015422a9ebb.herokuapp.com/).**
 
 ---
 
@@ -79,7 +79,7 @@ The following data schema has been created to show the relationship between the 
 
 ![Data schema](https://github.com/clawrence00/mototorque/blob/main/docs/images/data_schema.png)
 
-The relationship is one to many. The user can have many records created in the dictionary. As the dictionary is user generated many users can also created definitions for the same word or phrase, therefore it is also a many to one relationship. With this relationship it can be established which user created the dictionary record allowing this to be diplayed on the card.
+The relationship is one to many. The user can have many records created in the dictionary. That dictionary record can only have one user. As the dictionary is user generated many users can create definitions for the same word or phrase, however, each of these words or phrases is a separate dictionary record. With this relationship it can be established which user created the dictionary record allowing this to be diplayed on the card and allowing only them (or the administrator) to edit or delete their own dictionary records.
 
 ### Design Choices
 
@@ -179,7 +179,10 @@ During the intial execution of the test script it was found that for step 30 the
 
 ### Bugs & Fixes
 
--
+- I was struggling to migrate changes to my database. Installing flask-migrate really made this a simple and reliable process, where I could see which changes were made in the migrations folder.
+- When creating the routes and html templates in Codeanywhere I was unable to use the words 'login' or 'logout' as this would cause an error when running the application. To get around this I used 'signin', 'enter_user' and 'signout' instead.
+- I thought the browse function was not working correctly as I could not see any records when browsing by type for example the letter 'T'. When browsing by 'all' the records appeared. At the time the majority of the records created were called 'test'. As python is a strictly typed language when querying the database for words starting with 'T' none were found due to this. Once I realised this was the issue I was able to implement the use of 'ilike' to query the database for words starting with certain letters, irrelevent of whether they were capitalised or not.
+- During testing, an error was found with the incorrect dictionary record being deleted. The delete modal was not target the selected dicitonary ID and therefore deleting the first record (by ID number) in the dictionary database.
 
 ### Validation
 
@@ -195,25 +198,75 @@ All evidence of the validation can be found in the [validation](https://github.c
 
 ## Future impelementations
 
-In the intial wireframes there is a search bar present in the navbar. It was intended to add this element and the required functionality to get it to bring up a list of definitions based on a users search. Due to time constraints this was not possibly to apply to this version of the web application, however if I were to continue to build this further this is a feature that I would definately like to add as it would being more value to the end user.
+In the intial wireframes there is a search bar present in the navbar. It was intended to add this element and the required functionality to get it to bring up a list of definitions based on a users search. Due to time constraints this was not possible to apply to this version of the web application, however if I were to continue to build this further this is a feature that I would definately like to add as it would being more value to the end user.
 
 A feedback system on the dictionary records would also be a great future feature where other users could like or dislike the records.
 
-User profiles showing the users metrics for contributions, likes, dislikes and profile pictures.
+User profiles showing the user's metrics for contributions, likes, dislikes and profile pictures.
 
 ---
 
 ## Deployment
 
-The website was deployed using GitHub Pages. Here are the following steps required to **deploy the site**;
+The website was deployed using Heroku. The PostgreSQL database was hosted by ElephantSQL. Here are the following steps required to **deploy the site**;
 
-1. Select the repository.
-2. In the repository navigation click 'Settings'.
-3. In the list on the left, under 'Code and automation' select 'Pages'.
-4. Under 'Build and deployment', 'Source' should be 'Deploy from branch'.
-5. Under 'Build and deployment', 'Branch' select 'main'. The folder should be /(root). Click 'Save'.
+Set up ElephantSQL to host your database instance
 
-Your site should now be live and hosted by GitHub Pages. It may take a minute or two for the site to become available.
+1. Go to ElephantSQL.com and click "Get a managed database today"
+2. Select "Try now for FREE" in the TINY TURTLE database plan
+3. Select “Log in with GitHub” and authorize ElephantSQL with your selected GitHub account
+4. In the Create new team form:
+ - Add a team name (your own name is fine)
+ - Read and agree to the Terms of Service
+ - Select Yes for GDPR
+ - Provide your email address
+ - Click “Create Team
+5. Your account is successfully created! Click “Create New Instance”
+6. Set up your plan
+ - Give your plan a Name (this is commonly the name of the project)
+ - Select the Tiny Turtle (Free) plan
+ - You can leave the Tags field blank
+7. Select “Select Region”
+6. Then click “Review”
+7. Check your details are correct and then click “Create instance”
+8. Select a data center near you
+9. Return to the ElephantSQL dashboard and click on the database instance name for this project. Leave this tab open.
+   
+In your IDE create files that Heroku will need
+1. Generate the requirements.txt file with the following command in the terminal. After you run this command a new file called requirements.txt should appear in your root directory
+  - pip freeze --local > requirements.txt
+2. Heroku requires a Procfile containing a command to run your program. Inside the root directory of your project create the new file. It must be called Procfile with a capital P, otherwise Heroku won’t recognise it.
+3. Inside the file, add the following command
+  - web: python app.py
+4. Open your __init__.py file
+5. Add an if statement before the line setting the SLQALCHEMY_DATABASE_URI and, in the else, set the value to reference a new variable, DATABASE_URL.
+6. To ensure that SQLAlchemy can also read our external database, its URL needs to start with “postgresql://”, but we should not change this in the environment variable. Instead, we’ll make an addition to our else statement from the previous step to adjust our DATABASE_URL in case it starts with postgres://:
+7. Save all your files and then add, commit and push your changes to GitHub
+
+Conneting the database to Heroku
+
+1. Log into Heroku.com and click “New” and then “Create a new app”
+2. Choose a unique name for your app, select the region closest to you and click “Create app”
+3. Go to the Settings tab of your new app
+4. Click Reveal Config Vars
+5. Return to your ElephantSQL tab and copy your database URL
+6. Back on Heroku, add a Config Var called DATABASE_URL and paste your ElephantSQL database URL in as the value. Make sure you click “Add”
+7. Add each of your other environment variables except DEVELOPMENT and DB_URL from the env.py file as a Config Var.
+
+Deploy the site
+
+1. Navigate to the “Deploy” tab of your app
+2. In the Deployment method section, select “Connect to GitHub”
+3. Search for your repo and click Connect
+4. Optional: You can click Enable Automatic Deploys in case you make any further changes to the project. This will trigger any time code is pushed to your GitHub repository
+5. Use the Manual deploy section and click Deploy Branch. This will start the build process.
+6. The project is now in place and there is an empty database. The tables from the models.py file need to be added. Click the “More” button and select “Run console”.
+7. Type python3 into the console and click Run
+8. This opens the Python terminal. To create the tables use the following commands;
+ - from mototorque import db
+ - db.create_all()
+9. Exit the Python terminal, by typing exit() and hitting enter, and close the console.
+10. Click the “Open app” button to view the deployed site.
 
 To **clone this repository**;
 
