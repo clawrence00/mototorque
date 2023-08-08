@@ -154,24 +154,6 @@ The solution for the failed test in the testing section below (deleting the inco
 
 ## Testing
 
-<!-- ### Principals of Testing
-
-<!-- #### Automated Testing
-
-- Known as Test Driven Development (TDD)
-- Tests are written before any code therefore errors are picked up early in the development process.
-- Testing is quick. Testing frameworks such as Jest are used to reliably run tests in parallel.
-- Tests are specific to the code that is being tested
-- Testing is only as good as the questions being asked. User experience is not tested.
-
-#### Manual Testing
-
-- Known as Behaviour Driven Development (BDD)
-- Testing is performed from the perspective of the user, after code has been written.
-- Testing can be time consuming and resource hungry depending on the size of the project.
-- User experience is tested such as browser compatibility and user screen sizes (mobile or desktop).
-- There can be a high error rate as a human is performing the testing and certain scenarios can be missed. --> -->
-
 ### Testing for this project
 
 Manual testing was performed to check the functions of creating, reading, updating and deleting database records by authenticated users, non-authenticated users and the admin was working as intended. To record this testing a test script was created to follow a sequence of steps with the expected output. The actual output was reported and screenshots were appended to provide evidence of this testing.
