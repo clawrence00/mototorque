@@ -1,7 +1,7 @@
 # Milestone Project 3: Moto Torque
 
 ![Mockup on different screen sizes of home page](https://github.com/clawrence00/mototorque/blob/main/docs/images/mockup.png)
-Welcome to my third milestone project with the Code Institute. The purpose of this project it to build a full-stack site that allows your users to manage a common dataset about a particular domain. I have chosen to create a dictionary for motorcycling words and phrases. Users can sign up, add their own entries, edit and delete them. The definitions can then be displayed by all users.
+Welcome to my third milestone project with the Code Institute. The purpose of this project it to build a full-stack site that allows users to manage a common dataset about a particular domain. I have chosen to create a dictionary for motorcycling words and phrases. Users can sign up, add their own entries, edit and delete them. The definitions can then be displayed by all users.
 
 **Please find my deployed site [here](https://mototorque-c015422a9ebb.herokuapp.com/).**
 
