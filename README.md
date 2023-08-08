@@ -1,7 +1,7 @@
 # Milestone Project 3: Moto Torque
 
 ![Mockup on different screen sizes of home page](https://github.com/clawrence00/mototorque/blob/main/docs/images/mockup.png)
-Welcome to my third milestone project with the Code Institute. The purpose of this project it to build a full-stack site that allows your users to manage a common dataset about a particular domain. I have chosen to create a dictionary for motorcyling words and phrases. Users can sign up, add there own entries, edit and delete them. The definitions can then be displayed by all users.
+Welcome to my third milestone project with the Code Institute. The purpose of this project it to build a full-stack site that allows your users to manage a common dataset about a particular domain. I have chosen to create a dictionary for motorcycling words and phrases. Users can sign up, add their own entries, edit and delete them. The definitions can then be displayed by all users.
 
 **Please find my deployed site [here](https://mototorque-c015422a9ebb.herokuapp.com/).**
 
@@ -63,7 +63,7 @@ As a user of the web application I should be able to find words or phrases and v
 
 As a user I should be cited for adding a word or phrase and definition.
 
-As a user I should be able to edit or remove my contributons. No other user should be able to do this.
+As a user I should be able to edit or remove my contributions. No other user should be able to do this.
 
 The webpage must be responsive so that it can be experienced on mobile, tablet and desktop.
 
@@ -79,7 +79,7 @@ The following data schema has been created to show the relationship between the 
 
 ![Data schema](https://github.com/clawrence00/mototorque/blob/main/docs/images/data_schema.png)
 
-The relationship is one to many. The user can have many records created in the dictionary. That dictionary record can only have one user. As the dictionary is user generated many users can create definitions for the same word or phrase, however, each of these words or phrases is a separate dictionary record. With this relationship it can be established which user created the dictionary record allowing this to be diplayed on the card and allowing only them (or the administrator) to edit or delete their own dictionary records.
+The relationship is one to many. The user can have many records created in the dictionary. That dictionary record can only have one user. As the dictionary is user generated many users can create definitions for the same word or phrase, however, each of these words or phrases is a separate dictionary record. With this relationship it can be established which user created the dictionary record allowing this to be displayed on the card and allowing only them (or the administrator) to edit or delete their own dictionary records.
 
 ### Design Choices
 
@@ -87,17 +87,17 @@ For the majority of design choices inspiration was taken from motorcycle manufac
 
 #### Font
 
-Noto Sans from Google Fonts was chosen as the font with sans serif as back up. All of the motorcycle manufacturers mentioned above use sans serif fonts. Noto Sans is used on the Harley-Davidson website and therfore seemed like the obvious choice for this web application.
+Noto Sans from Google Fonts was chosen as the font with sans serif as back up. All of the motorcycle manufacturers mentioned above use sans serif fonts. Noto Sans is used on the Harley-Davidson website and therefore seemed like the obvious choice for this web application.
 
 #### Colours
 
 The colours have been kept simple. The navbar and footer are dark grey, using Materialize CSS' class blue-grey darken-3, and the font is white. The main part of the page is white and cards are used to display the information. These are also styled like the navbar and footer. Again, this reflects the styles found on the motorcycle manufacturer's websites.
 
-The colours for the links have also be taken from Materialize CSS' colour palletes and have been applied via CSS targeting.
+The colours for the links have also be taken from Materialize CSS' colour palettes and have been applied via CSS targeting.
 
 #### Styling
 
-The styling has been created using Materialize CSS. Cards have been used throughout to display data and forms. Modals have been added to confirm actions for deletion or in the case of the browse link to minimize mulitple links appearing in the navbar. For mobile devices the navbar collapses and when teh menu icon is pressed a sidebar appears.
+The styling has been created using Materialize CSS. Cards have been used throughout to display data and forms. Modals have been added to confirm actions for deletion or in the case of the browse link to minimize multiple links appearing in the navbar. For mobile devices the navbar collapses and when the menu icon is pressed a sidebar appears.
 
 #### Images
 
@@ -119,7 +119,7 @@ No images have been used for this application. They would likely be distracting 
 
 Where small pieces of code have been used these have been credited in comment strings near the code.
 
-The walkthrough lesson from the code institute was used for the initial set up of the coding space, the required files and installing flask and psycopg2. It was also a greate base for creating the CRUD functionality that my project required.
+The walkthrough lesson from the code institute was used for the initial set up of the coding space, the required files and installing flask and psycopg2. It was also a great base for creating the CRUD functionality that my project required.
 
 - [Tim Nelson - Code Institute](https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+DIWADRDB+2022_Q3/courseware/c0c31790fcf540539fd2bd3678b12406/6e44128b0b37416ab40c1a87ef2cb32a/)
 
@@ -127,7 +127,7 @@ This youtube playlist from John Elder at Codemy was really helpful, particularly
 
 - [John Elder - Codemy](https://www.youtube.com/playlist?list=PLCC34OHNcOtolz2Vd9ZSeSXWc8Bq23yEz)
 
-This youtube video from Corey Schafer was also used to establish flask-login fuctionality.
+This youtube video from Corey Schafer was also used to establish flask-login functionality.
 
 - [Corey Schafer](https://www.youtube.com/watch?v=CSHx6eCkmv0&ab_channel=CoreySchafer)
 
@@ -173,20 +173,20 @@ The solution for the failed test in the testing section below (deleting the inco
 
 ### Testing for this project
 
-Manual testing was performed to check the functions of creating, reading, updating and deleting database records by authenticated users, non-authenticated users and the admin was working as intended. To record this testing a testscript was created to follow a sequence of steps with the expected output. The actual output was reported and screenshots were appended to provide evidence of this testing.
+Manual testing was performed to check the functions of creating, reading, updating and deleting database records by authenticated users, non-authenticated users and the admin was working as intended. To record this testing a test script was created to follow a sequence of steps with the expected output. The actual output was reported and screenshots were appended to provide evidence of this testing.
 
-During the intial execution of the test script it was found that for step 30 the incorrect dicitonary record was deleted. This was due to the href attribute in the delete modal anchor tag not targeting the dicitonary record that had been selected for deletion. Steps 27 to 30 were repeated following the correction for this and all were found to pass.
+During the initial execution of the test script it was found that for step 30 the incorrect dictionary record was deleted. This was due to the href attribute in the delete modal anchor tag not targeting the dictionary record that had been selected for deletion. Steps 27 to 30 were repeated following the correction for this and all were found to pass.
 
 ### Bugs & Fixes
 
 - I was struggling to migrate changes to my database. Installing flask-migrate really made this a simple and reliable process, where I could see which changes were made in the migrations folder.
 - When creating the routes and html templates in Codeanywhere I was unable to use the words 'login' or 'logout' as this would cause an error when running the application. To get around this I used 'signin', 'enter_user' and 'signout' instead.
-- I thought the browse function was not working correctly as I could not see any records when browsing by type for example the letter 'T'. When browsing by 'all' the records appeared. At the time the majority of the records created were called 'test'. As python is a strictly typed language when querying the database for words starting with 'T' none were found due to this. Once I realised this was the issue I was able to implement the use of 'ilike' to query the database for words starting with certain letters, irrelevent of whether they were capitalised or not.
-- During testing, an error was found with the incorrect dictionary record being deleted. The delete modal was not target the selected dicitonary ID and therefore deleting the first record (by ID number) in the dictionary database.
+- I thought the browse function was not working correctly as I could not see any records when browsing by type for example the letter 'T'. When browsing by 'all' the records appeared. At the time the majority of the records created were called 'test'. As python is a strictly typed language when querying the database for words starting with 'T' none were found due to this. Once I realised this was the issue I was able to implement the use of 'ilike' to query the database for words starting with certain letters, irrelevant of whether they were capitalised or not.
+- During testing, an error was found with the incorrect dictionary record being deleted. The delete modal was not target the selected dictionary ID and therefore deleting the first record (by ID number) in the dictionary database.
 
 ### Validation
 
-The HTML for the welcome message and a question with answers was checked using the [W3C markup validation service](https://validator.w3.org/). There were some warnings relating to the browse table inside the browse modal. This starts with seven columns for teh letters, then 5 columns for the numbers. This was delibrately done to evenly spread the links out and does not affect the rendering of the table. Mulitple info messages were found where trailing back slashes are present in the code. These are present due to using the 'prettier-vscode' extension in the Codeanywhere IDE.
+The HTML for the welcome message and a question with answers was checked using the [W3C markup validation service](https://validator.w3.org/). There were some warnings relating to the browse table inside the browse modal. This starts with seven columns for the letters, then 5 columns for the numbers. This was deliberately done to evenly spread the links out and does not affect the rendering of the table. Multiple info messages were found where trailing back slashes are present in the code. These are present due to using the 'prettier-vscode' extension in the Codeanywhere IDE.
 
 The CSS was checked using the [W3C CSS validation service](https://jigsaw.w3.org/css-validator/). There were no issues to report.
 
@@ -196,13 +196,13 @@ All evidence of the validation can be found in the [validation](https://github.c
 
 ---
 
-## Future impelementations
+## Future implementations
 
-In the intial wireframes there is a search bar present in the navbar. It was intended to add this element and the required functionality to get it to bring up a list of definitions based on a users search. Due to time constraints this was not possible to apply to this version of the web application, however if I were to continue to build this further this is a feature that I would definately like to add as it would being more value to the end user.
+In the initial wireframes there is a search bar present in the navbar. It was intended to add this element and the required functionality to get it to bring up a list of definitions based on a user's search. Due to time constraints this was not possible to apply to this version of the web application, however if I were to continue to build this further this is a feature that I would definitely like to add as it would being more value to the end user.
 
 A feedback system on the dictionary records would also be a great future feature where other users could like or dislike the records.
 
-User profiles showing the user's metrics for contributions, likes, dislikes and profile pictures.
+User profiles showing the users metrics for contributions, likes, dislikes and profile pictures.
 
 ---
 
@@ -238,7 +238,7 @@ In your IDE create files that Heroku will need
 2. Heroku requires a Procfile containing a command to run your program. Inside the root directory of your project create the new file. It must be called Procfile with a capital P, otherwise Heroku won’t recognise it.
 3. Inside the file, add the following command
   - web: python app.py
-4. Open your __init__.py file
+4. Open your init.py file
 5. Add an if statement before the line setting the SLQALCHEMY_DATABASE_URI and, in the else, set the value to reference a new variable, DATABASE_URL.
 6. To ensure that SQLAlchemy can also read our external database, its URL needs to start with “postgresql://”, but we should not change this in the environment variable. Instead, we’ll make an addition to our else statement from the previous step to adjust our DATABASE_URL in case it starts with postgres://:
 7. Save all your files and then add, commit and push your changes to GitHub
