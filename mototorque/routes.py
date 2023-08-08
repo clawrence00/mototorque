@@ -2,7 +2,8 @@ from flask import render_template, request, redirect, url_for, flash
 from mototorque import app, db
 from mototorque.models import Dictionary, Users
 from werkzeug.security import generate_password_hash, check_password_hash
-from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
+from flask_login import UserMixin, login_user, LoginManager, login_required,\
+    logout_user, current_user
 
 
 # Routes for navigation
@@ -26,7 +27,8 @@ def browse():
         words = list(Dictionary.query.order_by(Dictionary.word_phrase).all())
         return render_template("browse.html", letter=selected, words=words)
     words = list(Dictionary.query.filter(
-        Dictionary.word_phrase.ilike(f'{selected}%')).order_by(Dictionary.word_phrase).all())
+        Dictionary.word_phrase.ilike(f'{selected}%'))
+        .order_by\(Dictionary.word_phrase).all())
     return render_template("browse.html", letter=selected, words=words)
 
 # Routes for Users
@@ -35,13 +37,14 @@ def browse():
 @ app.route("/add_user", methods=["GET", "POST"])
 def add_user():
     if request.method == "POST":
-        user=Users.query.filter_by(email=request.form.get("email")).first()
-        username=Users.query.filter_by(username=request.form.get("username")).first()
+        user = Users.query.filter_by(email=request.form.get("email")).first()
+        username = Users.query.filter_by(
+            username=request.form.get("username")).first()
         if user is None:
             if username is None:
-                hash_password=generate_password_hash(
+                hash_password = generate_password_hash(
                     request.form.get("password_hash"))
-                user=Users(
+                user = Users(
                     username=request.form.get("username"),
                     email=request.form.get("email"),
                     password_hash=hash_password
@@ -56,7 +59,7 @@ def add_user():
 @ app.route("/delete_user/<int:user_id>", methods=["GET", "POST"])
 @login_required
 def delete_user(user_id):
-    user=Users.query.get_or_404(user_id)
+    user = Users.query.get_or_404(user_id)
     db.session.delete(user)
     db.session.commit()
     return redirect(url_for("admin"))
@@ -68,8 +71,8 @@ def delete_user(user_id):
 @ login_required
 def add_word():
     if request.method == "POST":
-        poster=current_user.id
-        entry=Dictionary(
+        poster = current_user.id
+        entry = Dictionary(
             word_phrase=request.form.get("word_phrase"),
             definition=request.form.get("definition"),
             example=request.form.get("example"),
@@ -84,11 +87,11 @@ def add_word():
 @ app.route("/edit_word/<int:word_id>", methods=["GET", "POST"])
 @login_required
 def edit_word(word_id):
-    word=Dictionary.query.get_or_404(word_id)
+    word = Dictionary.query.get_or_404(word_id)
     if request.method == "POST":
-        word.word_phrase=request.form.get("word_phrase"),
-        word.definition=request.form.get("definition"),
-        word.example=request.form.get("example"),
+        word.word_phrase = request.form.get("word_phrase"),
+        word.definition = request.form.get("definition"),
+        word.example = request.form.get("example"),
         db.session.commit()
         return render_template("edited.html")
     return render_template("edit.html", word=word)
@@ -97,7 +100,7 @@ def edit_word(word_id):
 @ app.route("/delete_word/<int:word_id>", methods=["GET", "POST"])
 @login_required
 def delete_word(word_id):
-    word=Dictionary.query.get_or_404(word_id)
+    word = Dictionary.query.get_or_404(word_id)
     db.session.delete(word)
     db.session.commit()
     return render_template("deleted.html")
@@ -105,9 +108,9 @@ def delete_word(word_id):
 
 # login manager
 
-login_manager=LoginManager()
+login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view='signin'
+login_manager.login_view = 'signin'
 
 
 @ login_manager.user_loader
@@ -132,7 +135,8 @@ def signin():
         user = Users.query.filter_by(
             username=request.form.get("username")).first()
         if user:
-            if check_password_hash(user.password_hash, request.form.get("password_hash")):
+            if check_password_hash(
+                    user.password_hash, request.form.get("password_hash")):
                 login_user(user)
                 if current_user.username == "admin":
                     return redirect(url_for('admin'))
